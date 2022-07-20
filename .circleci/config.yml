@@ -190,9 +190,8 @@ jobs:
           name: Add back-end DNS name to ansible inventory
           command: |
             aws ec2 describe-instances \
-            --query 'Reservations[*].Instances[*].PublicDnsName' \
-            --output text >> .circleci/ansible/inventory.txt
-            cat inventory.txt
+              --query 'Reservations[*].Instances[*].PublicDnsName' \
+              --output text >> .circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
