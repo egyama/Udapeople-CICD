@@ -333,14 +333,14 @@ configure-infrastructure:
 #               # your code here
 #             fi
             
-  notify_on_success:
-    docker:
-    - image: cimg/base:stable
-    steps:
-      - slack/notify:
-        event: pass
-        channel: cicd-pipeline
-        template: success_tagged_deployment_1
+  # notify_on_success:
+  #   docker:
+  #   - image: cimg/base:stable
+  #   steps:
+  #     - slack/notify:
+  #       event: pass
+  #       channel: cicd-pipeline
+  #       template: success_tagged_deployment_1
 
 workflows:
   default:
@@ -355,12 +355,12 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
-      - notify_on_success:
-          requires:
-            - test-frontend
-            - test-backend
-            - scan-backend
-            - scan-frontend
+      # - notify_on_success:
+      #     requires:
+      #       - test-frontend
+      #       - test-backend
+      #       - scan-backend
+      #       - scan-frontend
       - deploy-infrastructure:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
